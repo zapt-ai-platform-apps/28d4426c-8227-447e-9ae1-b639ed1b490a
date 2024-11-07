@@ -117,7 +117,7 @@ function QuizPage() {
             class={`bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md ${
               selectedOption() === null
                 ? 'opacity-50 cursor-not-allowed'
-                : 'cursor-pointer transform hover:scale-105 transition duration-300'
+                : 'cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer'
             }`}
             onClick={handleNextQuestion}
             disabled={selectedOption() === null}

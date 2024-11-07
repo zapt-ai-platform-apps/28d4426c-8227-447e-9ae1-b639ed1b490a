@@ -2,13 +2,6 @@
 
 Welcome to **Construction Career**! This interactive app is designed to inspire kids to explore exciting careers in construction through fun games and activities. Created in collaboration with **Tilbury Douglas**, a leading UK building, infrastructure, engineering, and fit-out company, we're here to make learning an adventure!
 
-## User Roles
-
-The app now includes user roles to enhance the experience:
-
-- **User**: Regular users who can explore roles, take quizzes, and build their own construction scenes.
-- **Admin**: Admin users have additional access to manage content and view administrative dashboards.
-
 ## User Journeys
 
 ### 1. Getting Started

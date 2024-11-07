@@ -16,7 +16,7 @@ function LandingPage() {
         Join <span class="text-orange-500">Constructor Carl</span> on a fun
         adventure and explore the exciting world of construction!
       </p>
-      <img src="https://images.unsplash.com/photo-1490351267196-b7a67e26e41b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxjYXJ0b29uJTIwY29uc3RydWN0aW9uJTIwbWFzY290JTIwY2hhcmFjdGVyJTIwd2F2aW5nJTIwYXQlMjBraWRzJTIwb24lMjBhJTIwYnVpbGRpbmclMjBzaXRlfGVufDB8fHx8MTczMDk3ODAwOHww&ixlib=rb-4.0.3&q=80&w=1080"
+      <img src="https://images.unsplash.com/reserve/3wBPUcDrR9KaduD3PvkY_DSC_0915.JPG?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw5fHxjYXJ0b29uJTIwY29uc3RydWN0aW9uJTIwbWFzY290JTIwY2hhcmFjdGVyJTIwd2F2aW5nJTIwYXQlMjBraWRzJTIwb24lMjBhJTIwYnVpbGRpbmclMjBzaXRlfGVufDB8fHx8MTczMDk3ODAwOHww&ixlib=rb-4.0.3&q=80&w=1080"
         
         alt="Constructor Carl waving"
         class="w-full max-w-md mb-6"

@@ -114,7 +114,7 @@ function App() {
             <p>Welcome, Admin!</p>
             {/* Add admin functionalities here */}
             <button
-              class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
+              class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
               onClick={handleSignOut}
             >
               Sign Out
@@ -131,7 +131,7 @@ function App() {
             <Route path="/builder" component={ProjectBuilder} />
           </Routes>
           <button
-            class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
+            class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
             onClick={handleSignOut}
           >
             Sign Out

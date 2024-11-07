@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/node';
 import { initializeZapt } from '@zapt/zapt-js';
 import { neon, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from '@drizzle-orm/neon-serverless';
+import { drizzle } from '@drizzle-orm/neon-http';
 import { users } from '../drizzle/schema.js';
-import { eq } from 'drizzle-orm/expressions';
+import { eq } from 'drizzle-orm';
 
 Sentry.init({
   dsn: process.env.VITE_PUBLIC_SENTRY_DSN,

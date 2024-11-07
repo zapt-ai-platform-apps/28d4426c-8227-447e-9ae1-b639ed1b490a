@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 import { initializeZapt } from '@zapt/zapt-js';
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from '@drizzle-orm/neon-http';
+import { neon, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
 import { users } from '../drizzle/schema.js';
 import { eq } from 'drizzle-orm';
 
@@ -17,6 +17,8 @@ Sentry.init({
 });
 
 const { supabase } = initializeZapt(process.env.VITE_PUBLIC_APP_ID);
+
+neonConfig.fetchConnectionCache = true;
 
 export async function authenticateUser(req) {
   const authHeader = req.headers.authorization;
@@ -35,10 +37,7 @@ export async function authenticateUser(req) {
   }
 
   // Initialize database connection
-  const sql = neon(process.env.NEON_DB_URL, {
-    fetchConnectionCache: true,
-    fullResults: true,
-  });
+  const sql = neon(process.env.NEON_DB_URL);
   const db = drizzle(sql);
 
   // Check if user exists in our database

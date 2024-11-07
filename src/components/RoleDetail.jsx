@@ -11,7 +11,7 @@ function RoleDetail() {
   const fetchRoleDetail = async () => {
     setLoading(true);
     try {
-      const prompt = `Provide detailed information about the role of a ${params.id} in construction. Include a brief description, required skills (as an array), educational path, and daily activities. Format the response as a JSON object with "title", "description", "skills", "education", and "image" fields. Use a placeholder image URL for "image".`;
+      const prompt = `Provide detailed information about the role of a ${params.id} in construction. Include a brief description, required skills (as an array), educational path, and daily activities. Format the response as a JSON object with "title", "description", "skills", "education", "activities", and "image" fields. Use a placeholder image URL for "image".`;
 
       const result = await createEvent('chatgpt_request', {
         prompt,
@@ -68,6 +68,10 @@ function RoleDetail() {
             Educational Path
           </h3>
           <p class="mb-4">{role().education}</p>
+          <h3 class="text-2xl font-semibold text-blue-600 mb-2">
+            Daily Activities
+          </h3>
+          <p class="mb-4">{role().activities}</p>
           <button
             class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
             onClick={handleQuiz}

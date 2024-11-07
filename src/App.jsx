@@ -50,19 +50,19 @@ function App() {
   onMount(checkUserSignedIn);
 
   createEffect(() => {
-    const {
-      data: authListener,
-    } = supabase.auth.onAuthStateChange((_, session) => {
-      if (session?.user) {
-        setUser(session.user);
-        setCurrentPage('homePage');
-        fetchUserRole();
-      } else {
-        setUser(null);
-        setUserRole(null);
-        setCurrentPage('login');
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_, session) => {
+        if (session?.user) {
+          setUser(session.user);
+          setCurrentPage('homePage');
+          fetchUserRole();
+        } else {
+          setUser(null);
+          setUserRole(null);
+          setCurrentPage('login');
+        }
       }
-    });
+    );
 
     return () => {
       authListener.unsubscribe();

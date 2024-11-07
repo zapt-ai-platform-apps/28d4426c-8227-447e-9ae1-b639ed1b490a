@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/node';
 import { initializeZapt } from '@zapt/zapt-js';
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from '@drizzle-orm/neon-http';
+import { neon, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from '@drizzle-orm/neon-serverless';
 import { users } from '../drizzle/schema.js';
 import { eq } from 'drizzle-orm/expressions';
 
@@ -35,6 +35,7 @@ export async function authenticateUser(req) {
   }
 
   // Initialize database connection
+  neonConfig.fetchConnectionCache = true;
   const sql = neon(process.env.NEON_DB_URL);
   const db = drizzle(sql);
 

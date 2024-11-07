@@ -20,7 +20,7 @@
     "@neondatabase/serverless": "^0.9.5",
     "dotenv": "^16.3.1",
     "@drizzle-orm/pg-core": "^0.33.0",
-    "@drizzle-orm/neon-http": "^0.33.0"
+    "@drizzle-orm/neon-serverless": "^0.33.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

@@ -14,7 +14,9 @@ function ProjectPlanner() {
     if (projectType() && material() && team().length > 0) {
       setLoading(true);
       try {
-        const prompt = `Provide feedback on planning a ${projectType()} using ${material()} with a team of ${team().join(', ')}.`;
+        const prompt = `Provide feedback on planning a ${projectType()} using ${material()} with a team of ${team().join(
+          ', '
+        )}.`;
 
         const result = await createEvent('chatgpt_request', {
           prompt,
@@ -53,10 +55,14 @@ function ProjectPlanner() {
       >
         &larr; Back to Home
       </button>
-      <h2 class="text-3xl font-bold text-blue-700 mb-6">Plan a Construction Project</h2>
+      <h2 class="text-3xl font-bold text-blue-700 mb-6">
+        Plan a Construction Project
+      </h2>
       <div class="space-y-6 mb-6">
         <div>
-          <label class="block text-lg font-semibold mb-2">Select Project Type:</label>
+          <label class="block text-lg font-semibold mb-2">
+            Select Project Type:
+          </label>
           <select
             class="w-full p-3 border border-gray-300 rounded-lg box-border"
             value={projectType()}
@@ -69,7 +75,9 @@ function ProjectPlanner() {
           </select>
         </div>
         <div>
-          <label class="block text-lg font-semibold mb-2">Choose Materials:</label>
+          <label class="block text-lg font-semibold mb-2">
+            Choose Materials:
+          </label>
           <select
             class="w-full p-3 border border-gray-300 rounded-lg box-border"
             value={material()}
@@ -82,9 +90,19 @@ function ProjectPlanner() {
           </select>
         </div>
         <div>
-          <label class="block text-lg font-semibold mb-2">Select Team Members:</label>
+          <label class="block text-lg font-semibold mb-2">
+            Select Team Members:
+          </label>
           <div class="flex flex-wrap">
-            <For each={['Architect', 'Engineer', 'Builder', 'Electrician', 'Plumber']}>
+            <For
+              each={[
+                'Architect',
+                'Engineer',
+                'Builder',
+                'Electrician',
+                'Plumber',
+              ]}
+            >
               {(member) => (
                 <div class="mr-4 mb-2">
                   <label class="inline-flex items-center">
@@ -102,7 +120,9 @@ function ProjectPlanner() {
         </div>
       </div>
       <button
-        class={`bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 ${loading() ? 'opacity-50 cursor-not-allowed' : ''}`}
+        class={`bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 ${
+          loading() ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
         onClick={handlePlanProject}
         disabled={loading()}
       >

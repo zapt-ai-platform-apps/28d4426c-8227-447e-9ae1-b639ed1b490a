@@ -54,15 +54,17 @@ function RoleDetail() {
             class="w-full h-64 object-cover rounded-md mb-6"
           />
           <p class="text-lg mb-4">{role().description}</p>
-          <h3 class="text-2xl font-semibold text-blue-600 mb-2">Required Skills</h3>
+          <h3 class="text-2xl font-semibold text-blue-600 mb-2">
+            Required Skills
+          </h3>
           <ul class="list-disc list-inside mb-4">
             <For each={role().skills}>
-              {(skill) => (
-                <li>{skill}</li>
-              )}
+              {(skill) => <li>{skill}</li>}
             </For>
           </ul>
-          <h3 class="text-2xl font-semibold text-blue-600 mb-2">Educational Path</h3>
+          <h3 class="text-2xl font-semibold text-blue-600 mb-2">
+            Educational Path
+          </h3>
           <p class="mb-4">{role().education}</p>
           <button
             class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
@@ -71,9 +73,6 @@ function RoleDetail() {
             Take Quiz
           </button>
         </div>
-      </Show>
-      <Show when={!loading() && !role()}>
-        <p>No role details available.</p>
       </Show>
     </div>
   );

@@ -9,9 +9,12 @@ function LandingPage() {
 
   return (
     <div class="flex flex-col items-center justify-center h-full p-6 bg-gradient-to-br from-blue-100 to-green-100">
-      <h1 class="text-5xl font-extrabold text-orange-600 mb-4">Welcome to Buildville!</h1>
+      <h1 class="text-5xl font-extrabold text-orange-600 mb-4">
+        Welcome to Buildville!
+      </h1>
       <p class="text-xl text-center mb-6">
-        Join <span class="text-orange-500">Constructor Carl</span> on a fun adventure and explore the exciting world of construction!
+        Join <span class="text-orange-500">Constructor Carl</span> on a fun
+        adventure and explore the exciting world of construction!
       </p>
       <img
         src=""

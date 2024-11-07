@@ -14,7 +14,9 @@ function QuizPage() {
   const fetchQuizQuestions = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/getQuizQuestions?roleTitle=${params.roleTitle}`);
+      const response = await fetch(
+        `/api/getQuizQuestions?roleTitle=${params.roleTitle}`
+      );
       if (response.ok) {
         const data = await response.json();
         setQuestions(data.questions);
@@ -35,7 +37,9 @@ function QuizPage() {
   };
 
   const handleNextQuestion = () => {
-    if (selectedOption() === questions()[currentQuestionIndex()].correctAnswer) {
+    if (
+      selectedOption() === questions()[currentQuestionIndex()].correctAnswer
+    ) {
       setScore(score() + 1);
     }
     setSelectedOption(null);
@@ -70,8 +74,12 @@ function QuizPage() {
       </Show>
       <Show when={!loading() && quizCompleted()}>
         <div class="text-center">
-          <h2 class="text-3xl font-bold text-blue-700 mb-4">Quiz Completed!</h2>
-          <p class="text-lg mb-6">Your Score: {score()} / {questions().length}</p>
+          <h2 class="text-3xl font-bold text-blue-700 mb-4">
+            Quiz Completed!
+          </h2>
+          <p class="text-lg mb-6">
+            Your Score: {score()} / {questions().length}
+          </p>
           <button
             class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 mb-4 cursor-pointer"
             onClick={handleRetakeQuiz}
@@ -80,12 +88,17 @@ function QuizPage() {
           </button>
         </div>
       </Show>
-      <Show when={!loading() && !quizCompleted() && questions().length > 0}>
+      <Show
+        when={!loading() && !quizCompleted() && questions().length > 0}
+        fallback={<p>No questions available.</p>}
+      >
         <div>
           <h2 class="text-3xl font-bold text-orange-600 mb-4">
             Question {currentQuestionIndex() + 1} of {questions().length}
           </h2>
-          <p class="text-xl mb-6">{questions()[currentQuestionIndex()].question}</p>
+          <p class="text-xl mb-6">
+            {questions()[currentQuestionIndex()].question}
+          </p>
           <div class="space-y-4 mb-6">
             <For each={questions()[currentQuestionIndex()].options}>
               {(option) => (
@@ -102,7 +115,9 @@ function QuizPage() {
           </div>
           <button
             class={`bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md ${
-              selectedOption() === null ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer transform hover:scale-105 transition duration-300'
+              selectedOption() === null
+                ? 'opacity-50 cursor-not-allowed'
+                : 'cursor-pointer transform hover:scale-105 transition duration-300'
             }`}
             onClick={handleNextQuestion}
             disabled={selectedOption() === null}
@@ -110,9 +125,6 @@ function QuizPage() {
             Next
           </button>
         </div>
-      </Show>
-      <Show when={!loading() && !quizCompleted() && questions().length === 0}>
-        <p>No questions available.</p>
       </Show>
     </div>
   );

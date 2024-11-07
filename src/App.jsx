@@ -13,7 +13,9 @@ function App() {
   const [currentPage, setCurrentPage] = createSignal('login');
 
   const checkUserSignedIn = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     if (user) {
       setUser(user);
       setCurrentPage('homePage');
@@ -23,7 +25,9 @@ function App() {
   onMount(checkUserSignedIn);
 
   createEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((_, session) => {
+    const {
+      data: authListener,
+    } = supabase.auth.onAuthStateChange((_, session) => {
       if (session?.user) {
         setUser(session.user);
         setCurrentPage('homePage');
@@ -51,7 +55,9 @@ function App() {
         fallback={
           <div class="flex items-center justify-center min-h-screen">
             <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
-              <h2 class="text-3xl font-bold mb-6 text-center text-orange-600">Sign in with ZAPT</h2>
+              <h2 class="text-3xl font-bold mb-6 text-center text-orange-600">
+                Sign in with ZAPT
+              </h2>
               <a
                 href="https://www.zapt.ai"
                 target="_blank"

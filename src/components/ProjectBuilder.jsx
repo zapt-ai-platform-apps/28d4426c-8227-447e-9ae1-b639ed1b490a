@@ -47,7 +47,9 @@ function ProjectBuilder() {
       >
         &larr; Back to Home
       </button>
-      <h2 class="text-4xl font-bold text-orange-600 mb-4">Build Your Construction Scene!</h2>
+      <h2 class="text-4xl font-bold text-orange-600 mb-4">
+        Build Your Construction Scene!
+      </h2>
       <div class="flex flex-wrap">
         <div class="w-full md:w-1/4 p-2">
           <h3 class="text-2xl font-semibold mb-2">Available Items</h3>
@@ -78,7 +80,11 @@ function ProjectBuilder() {
                   src={item.image}
                   alt={item.name}
                   class="absolute top-0 left-0 w-20 h-20 object-cover cursor-move"
-                  style={{ transform: `translate(${Math.random() * 80}%, ${Math.random() * 80}%)` }}
+                  style={{
+                    transform: `translate(${Math.random() * 80}%, ${
+                      Math.random() * 80
+                    }%)`,
+                  }}
                 />
               )}
             </For>

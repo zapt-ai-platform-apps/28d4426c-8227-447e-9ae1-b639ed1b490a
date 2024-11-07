@@ -8,12 +8,12 @@ function LandingPage() {
   };
 
   return (
-    <div class="flex flex-col items-center justify-center h-full p-6">
+    <div class="flex flex-col items-center justify-center min-h-screen p-6">
       <h1 class="text-4xl font-bold text-blue-700 mb-4">Welcome to Construction Career</h1>
       <p class="text-lg text-center mb-6">
         Explore exciting construction careers with Tilbury Douglas!
       </p>
-      <img src="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwzfHxjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwd2l0aCUyMGtpZHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3MzA5NzI3Mzd8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      <img src="https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwd2l0aCUyMGtpZHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3MzA5NzI3Mzd8MA&ixlib=rb-4.0.3&q=80&w=1080"
         
         alt="Construction site"
         class="w-full max-w-md mb-6"

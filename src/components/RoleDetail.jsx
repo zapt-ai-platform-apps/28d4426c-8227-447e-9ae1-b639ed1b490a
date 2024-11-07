@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, onMount, Show, For } from 'solid-js';
 import { useParams, useNavigate } from '@solidjs/router';
 
 function RoleDetail() {
@@ -9,14 +9,19 @@ function RoleDetail() {
 
   const fetchRoleDetail = async () => {
     setLoading(true);
-    const response = await fetch(`/api/getRoleDetail?id=${params.id}`);
-    if (response.ok) {
-      const data = await response.json();
-      setRole(data.role);
-    } else {
-      console.error('Error fetching role details:', response.statusText);
+    try {
+      const response = await fetch(`/api/getRoleDetail?id=${params.id}`);
+      if (response.ok) {
+        const data = await response.json();
+        setRole(data.role);
+      } else {
+        console.error('Error fetching role details:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching role details:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   onMount(fetchRoleDetail);
@@ -30,16 +35,17 @@ function RoleDetail() {
   };
 
   return (
-    <div class="p-6">
+    <div class="p-6 min-h-screen">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
       >
         &larr; Back to Roles
       </button>
-      {loading() ? (
+      <Show when={loading()}>
         <p>Loading...</p>
-      ) : role() ? (
+      </Show>
+      <Show when={!loading() && role()}>
         <div>
           <h2 class="text-3xl font-bold text-blue-700 mb-4">{role().title}</h2>
           <img
@@ -50,9 +56,11 @@ function RoleDetail() {
           <p class="text-lg mb-4">{role().description}</p>
           <h3 class="text-2xl font-semibold text-blue-600 mb-2">Required Skills</h3>
           <ul class="list-disc list-inside mb-4">
-            {role().skills.map((skill) => (
-              <li>{skill}</li>
-            ))}
+            <For each={role().skills}>
+              {(skill) => (
+                <li>{skill}</li>
+              )}
+            </For>
           </ul>
           <h3 class="text-2xl font-semibold text-blue-600 mb-2">Educational Path</h3>
           <p class="mb-4">{role().education}</p>
@@ -63,9 +71,10 @@ function RoleDetail() {
             Take Quiz
           </button>
         </div>
-      ) : (
+      </Show>
+      <Show when={!loading() && !role()}>
         <p>No role details available.</p>
-      )}
+      </Show>
     </div>
   );
 }

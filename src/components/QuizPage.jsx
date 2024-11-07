@@ -1,4 +1,4 @@
-import { createSignal, onMount } from 'solid-js';
+import { createSignal, onMount, Show, For } from 'solid-js';
 import { useNavigate, useParams } from '@solidjs/router';
 
 function QuizPage() {
@@ -13,14 +13,19 @@ function QuizPage() {
 
   const fetchQuizQuestions = async () => {
     setLoading(true);
-    const response = await fetch(`/api/getQuizQuestions?roleTitle=${params.roleTitle}`);
-    if (response.ok) {
-      const data = await response.json();
-      setQuestions(data.questions);
-    } else {
-      console.error('Error fetching quiz questions:', response.statusText);
+    try {
+      const response = await fetch(`/api/getQuizQuestions?roleTitle=${params.roleTitle}`);
+      if (response.ok) {
+        const data = await response.json();
+        setQuestions(data.questions);
+      } else {
+        console.error('Error fetching quiz questions:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching quiz questions:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   onMount(fetchQuizQuestions);
@@ -53,16 +58,17 @@ function QuizPage() {
   };
 
   return (
-    <div class="p-6">
+    <div class="p-6 min-h-screen">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
       >
         &larr; Back to Roles
       </button>
-      {loading() ? (
+      <Show when={loading()}>
         <p>Loading...</p>
-      ) : quizCompleted() ? (
+      </Show>
+      <Show when={!loading() && quizCompleted()}>
         <div class="text-center">
           <h2 class="text-3xl font-bold text-blue-700 mb-4">Quiz Completed!</h2>
           <p class="text-lg mb-6">Your Score: {score()} / {questions().length}</p>
@@ -73,23 +79,26 @@ function QuizPage() {
             Retake Quiz
           </button>
         </div>
-      ) : questions().length > 0 ? (
+      </Show>
+      <Show when={!loading() && !quizCompleted() && questions().length > 0}>
         <div>
           <h2 class="text-2xl font-bold text-blue-700 mb-4">
             Question {currentQuestionIndex() + 1} of {questions().length}
           </h2>
           <p class="text-lg mb-6">{questions()[currentQuestionIndex()].question}</p>
           <div class="space-y-4 mb-6">
-            {questions()[currentQuestionIndex()].options.map((option) => (
-              <div
-                class={`p-4 border rounded-lg cursor-pointer ${
-                  selectedOption() === option ? 'bg-blue-200' : ''
-                }`}
-                onClick={() => handleOptionSelect(option)}
-              >
-                {option}
-              </div>
-            ))}
+            <For each={questions()[currentQuestionIndex()].options}>
+              {(option) => (
+                <div
+                  class={`p-4 border rounded-lg cursor-pointer ${
+                    selectedOption() === option ? 'bg-blue-200' : ''
+                  }`}
+                  onClick={() => handleOptionSelect(option)}
+                >
+                  {option}
+                </div>
+              )}
+            </For>
           </div>
           <button
             class={`bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md ${
@@ -101,9 +110,10 @@ function QuizPage() {
             Next
           </button>
         </div>
-      ) : (
+      </Show>
+      <Show when={!loading() && !quizCompleted() && questions().length === 0}>
         <p>No questions available.</p>
-      )}
+      </Show>
     </div>
   );
 }

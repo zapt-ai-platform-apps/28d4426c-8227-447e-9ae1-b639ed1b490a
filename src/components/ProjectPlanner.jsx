@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, Show, For } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { createEvent } from '../supabaseClient';
 
@@ -13,12 +13,6 @@ function ProjectPlanner() {
   const handlePlanProject = async () => {
     if (projectType() && material() && team().length > 0) {
       setLoading(true);
-      const projectDetails = {
-        projectType: projectType(),
-        material: material(),
-        team: team(),
-      };
-
       try {
         const prompt = `Provide feedback on planning a ${projectType()} using ${material()} with a team of ${team().join(', ')}.`;
 
@@ -52,7 +46,7 @@ function ProjectPlanner() {
   };
 
   return (
-    <div class="p-6">
+    <div class="p-6 min-h-screen">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
@@ -90,18 +84,20 @@ function ProjectPlanner() {
         <div>
           <label class="block text-lg font-semibold mb-2">Select Team Members:</label>
           <div class="flex flex-wrap">
-            {['Architect', 'Engineer', 'Builder', 'Electrician', 'Plumber'].map((member) => (
-              <div class="mr-4 mb-2">
-                <label class="inline-flex items-center">
-                  <input
-                    type="checkbox"
-                    checked={team().includes(member)}
-                    onChange={() => toggleTeamMember(member)}
-                  />
-                  <span class="ml-2">{member}</span>
-                </label>
-              </div>
-            ))}
+            <For each={['Architect', 'Engineer', 'Builder', 'Electrician', 'Plumber']}>
+              {(member) => (
+                <div class="mr-4 mb-2">
+                  <label class="inline-flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={team().includes(member)}
+                      onChange={() => toggleTeamMember(member)}
+                    />
+                    <span class="ml-2">{member}</span>
+                  </label>
+                </div>
+              )}
+            </For>
           </div>
         </div>
       </div>
@@ -112,9 +108,9 @@ function ProjectPlanner() {
       >
         {loading() ? 'Planning...' : 'Plan Project'}
       </button>
-      {feedback() && (
+      <Show when={feedback()}>
         <p class="mt-4 text-lg font-semibold">{feedback()}</p>
-      )}
+      </Show>
     </div>
   );
 }

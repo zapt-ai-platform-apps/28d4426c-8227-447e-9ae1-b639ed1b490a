@@ -1,10 +1,8 @@
 import { jokes } from '../drizzle/schema.js';
 import { authenticateUser } from './_apiUtils.js';
-import { neon, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { neon } from '@neondatabase/http';
+import { drizzle } from 'drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
-
-neonConfig.fetchConnectionCache = true;
 
 export default async function handler(req, res) {
   if (req.method !== 'GET') {

@@ -13,8 +13,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: [
       'drizzle-orm',
-      '@neondatabase/serverless',
-      '@drizzle-orm/neon-serverless',
+      '@neondatabase/http',
+      '@drizzle-orm/neon-http',
     ],
   },
 });

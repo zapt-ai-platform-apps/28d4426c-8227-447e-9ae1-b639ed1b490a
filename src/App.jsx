@@ -45,7 +45,7 @@ function App() {
   };
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-yellow-100 to-orange-100 text-gray-800">
+    <div class="h-full bg-gradient-to-br from-yellow-100 to-orange-100 text-gray-800">
       <Show
         when={currentPage() === 'homePage'}
         fallback={
@@ -62,6 +62,7 @@ function App() {
               </a>
               <Auth
                 supabaseClient={supabase}
+                appearance={{ theme: 'default' }}
                 providers={['google', 'facebook', 'apple']}
                 magicLink={true}
                 showLinks={false}

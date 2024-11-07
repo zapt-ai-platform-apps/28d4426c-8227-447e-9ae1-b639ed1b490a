@@ -35,7 +35,7 @@ function RoleDetail() {
   };
 
   return (
-    <div class="p-6 min-h-screen">
+    <div class="p-6 h-full">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
@@ -65,7 +65,7 @@ function RoleDetail() {
           <h3 class="text-2xl font-semibold text-blue-600 mb-2">Educational Path</h3>
           <p class="mb-4">{role().education}</p>
           <button
-            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
             onClick={handleQuiz}
           >
             Take Quiz

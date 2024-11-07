@@ -58,7 +58,7 @@ function QuizPage() {
   };
 
   return (
-    <div class="p-6 min-h-screen">
+    <div class="p-6 h-full">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
@@ -73,25 +73,25 @@ function QuizPage() {
           <h2 class="text-3xl font-bold text-blue-700 mb-4">Quiz Completed!</h2>
           <p class="text-lg mb-6">Your Score: {score()} / {questions().length}</p>
           <button
-            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 mb-4"
+            class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 mb-4 cursor-pointer"
             onClick={handleRetakeQuiz}
           >
-            Retake Quiz
+            Play Again
           </button>
         </div>
       </Show>
       <Show when={!loading() && !quizCompleted() && questions().length > 0}>
         <div>
-          <h2 class="text-2xl font-bold text-blue-700 mb-4">
+          <h2 class="text-3xl font-bold text-orange-600 mb-4">
             Question {currentQuestionIndex() + 1} of {questions().length}
           </h2>
-          <p class="text-lg mb-6">{questions()[currentQuestionIndex()].question}</p>
+          <p class="text-xl mb-6">{questions()[currentQuestionIndex()].question}</p>
           <div class="space-y-4 mb-6">
             <For each={questions()[currentQuestionIndex()].options}>
               {(option) => (
                 <div
                   class={`p-4 border rounded-lg cursor-pointer ${
-                    selectedOption() === option ? 'bg-blue-200' : ''
+                    selectedOption() === option ? 'bg-orange-200' : ''
                   }`}
                   onClick={() => handleOptionSelect(option)}
                 >

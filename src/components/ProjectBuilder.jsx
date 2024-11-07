@@ -1,6 +1,5 @@
 import { createSignal, Show, For, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
-import { createEvent } from '../supabaseClient';
 
 function ProjectBuilder() {
   const [sceneItems, setSceneItems] = createSignal([]);
@@ -33,7 +32,6 @@ function ProjectBuilder() {
   };
 
   const handleSaveScene = () => {
-    // Save the scene logic (could be expanded)
     setFeedback('Your scene has been saved to your Toolbox!');
   };
 
@@ -42,7 +40,7 @@ function ProjectBuilder() {
   };
 
   return (
-    <div class="p-6 min-h-screen bg-gradient-to-br from-yellow-100 to-orange-100">
+    <div class="p-6 h-full bg-gradient-to-br from-yellow-100 to-orange-100">
       <button
         class="mb-4 text-blue-500 underline cursor-pointer"
         onClick={handleBack}
@@ -79,7 +77,7 @@ function ProjectBuilder() {
                 <img
                   src={item.image}
                   alt={item.name}
-                  class="absolute top-0 left-0 w-20 h-20 object-cover cursor-pointer"
+                  class="absolute top-0 left-0 w-20 h-20 object-cover cursor-move"
                   style={{ transform: `translate(${Math.random() * 80}%, ${Math.random() * 80}%)` }}
                 />
               )}

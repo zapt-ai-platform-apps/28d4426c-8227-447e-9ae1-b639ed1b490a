@@ -7,6 +7,7 @@ import QuizPage from './components/QuizPage';
 import ProjectBuilder from './components/ProjectBuilder';
 import { supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 
 function App() {
   const [user, setUser] = createSignal(null);
@@ -49,7 +50,7 @@ function App() {
   };
 
   return (
-    <div class="h-full bg-gradient-to-br from-yellow-100 to-orange-100 text-gray-800">
+    <div class="min-h-screen bg-gradient-to-br from-yellow-100 to-orange-100 text-gray-800">
       <Show
         when={currentPage() === 'homePage'}
         fallback={
@@ -68,7 +69,7 @@ function App() {
               </a>
               <Auth
                 supabaseClient={supabase}
-                appearance={{ theme: 'default' }}
+                appearance={{ theme: ThemeSupa }}
                 providers={['google', 'facebook', 'apple']}
                 magicLink={true}
                 showLinks={false}

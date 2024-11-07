@@ -1,4 +1,4 @@
-import { createEvent } from '@zapt/zapt-js';
+import { createEvent } from '../src/supabaseClient.js';
 import * as Sentry from '@sentry/node';
 
 Sentry.init({
@@ -7,7 +7,7 @@ Sentry.init({
   initialScope: {
     tags: {
       type: 'backend',
-      projectId: process.env.PROJECT_ID,
+      projectId: process.env.VITE_PUBLIC_APP_ID,
     },
   },
 });

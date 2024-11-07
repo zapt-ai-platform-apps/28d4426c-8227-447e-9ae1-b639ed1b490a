@@ -1,6 +1,6 @@
 import { jokes } from '../drizzle/schema.js';
 import { authenticateUser } from './_apiUtils.js';
-import { neon, neonConfig } from '@neondatabase/serverless';
+import { neon } from '@neondatabase/serverless';
 import { drizzle } from '@drizzle-orm/neon-http';
 import { eq } from 'drizzle-orm';
 
@@ -13,8 +13,10 @@ export default async function handler(req, res) {
   try {
     const user = await authenticateUser(req);
 
-    neonConfig.fetchConnectionCache = true;
-    const sql = neon(process.env.NEON_DB_URL);
+    const sql = neon(process.env.NEON_DB_URL, {
+      fetchConnectionCache: true,
+      fullResults: true,
+    });
     const db = drizzle(sql);
 
     const result = await db

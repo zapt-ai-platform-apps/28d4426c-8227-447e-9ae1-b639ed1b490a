@@ -16,11 +16,11 @@
     "@zapt/zapt-js": "^1.0.5",
     "solid-js": "^1.8.22",
     "solid-markdown": "^2.0.13",
-    "drizzle-orm": "^0.30.1",
+    "drizzle-orm": "^0.33.0",
     "@neondatabase/serverless": "^0.9.5",
     "dotenv": "^16.3.1",
-    "@drizzle-orm/pg-core": "^0.30.1",
-    "@drizzle-orm/neon-http": "^0.30.1"
+    "@drizzle-orm/pg-core": "^0.33.0",
+    "@drizzle-orm/neon-http": "^0.33.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
@@ -28,6 +28,6 @@
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.7",
     "vite-plugin-solid": "^2.10.2",
-    "drizzle-kit": "^0.24.2"
+    "drizzle-kit": "^0.26.4"
   }
 }

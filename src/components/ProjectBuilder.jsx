@@ -1,5 +1,6 @@
 import { createSignal, Show, For, onMount } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import { createEvent } from '../supabaseClient';
 
 function ProjectBuilder() {
   const [sceneItems, setSceneItems] = createSignal([]);
@@ -11,13 +12,14 @@ function ProjectBuilder() {
   const fetchAvailableItems = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/getAvailableItems');
-      if (response.ok) {
-        const data = await response.json();
-        setAvailableItems(data.items);
-      } else {
-        console.error('Error fetching items:', response.statusText);
-      }
+      const prompt = `List 8 items that could be used in building a construction scene for kids. For each item, provide a "name" and a placeholder "image" URL. Format the response as a JSON array of items.`;
+
+      const result = await createEvent('chatgpt_request', {
+        prompt,
+        response_type: 'json',
+      });
+
+      setAvailableItems(result);
     } catch (error) {
       console.error('Error fetching items:', error);
     } finally {

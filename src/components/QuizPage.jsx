@@ -1,5 +1,6 @@
 import { createSignal, onMount, Show, For } from 'solid-js';
 import { useNavigate, useParams } from '@solidjs/router';
+import { createEvent } from '../supabaseClient';
 
 function QuizPage() {
   const [questions, setQuestions] = createSignal([]);
@@ -14,15 +15,14 @@ function QuizPage() {
   const fetchQuizQuestions = async () => {
     setLoading(true);
     try {
-      const response = await fetch(
-        `/api/getQuizQuestions?roleTitle=${params.roleTitle}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setQuestions(data.questions);
-      } else {
-        console.error('Error fetching quiz questions:', response.statusText);
-      }
+      const prompt = `Create a quiz with 5 multiple-choice questions about being a ${params.roleTitle}. Provide each question with four options and indicate the correct answer. Format the response as a JSON array of questions, each with "question", "options", and "correctAnswer" fields.`;
+
+      const result = await createEvent('chatgpt_request', {
+        prompt,
+        response_type: 'json',
+      });
+
+      setQuestions(result);
     } catch (error) {
       console.error('Error fetching quiz questions:', error);
     } finally {

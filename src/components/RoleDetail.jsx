@@ -1,5 +1,6 @@
 import { createSignal, onMount, Show, For } from 'solid-js';
 import { useParams, useNavigate } from '@solidjs/router';
+import { createEvent } from '../supabaseClient';
 
 function RoleDetail() {
   const params = useParams();
@@ -10,13 +11,14 @@ function RoleDetail() {
   const fetchRoleDetail = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/getRoleDetail?id=${params.id}`);
-      if (response.ok) {
-        const data = await response.json();
-        setRole(data.role);
-      } else {
-        console.error('Error fetching role details:', response.statusText);
-      }
+      const prompt = `Provide detailed information about the role of a ${params.id} in construction. Include a brief description, required skills (as an array), educational path, and daily activities. Format the response as a JSON object with "title", "description", "skills", "education", and "image" fields. Use a placeholder image URL for "image".`;
+
+      const result = await createEvent('chatgpt_request', {
+        prompt,
+        response_type: 'json',
+      });
+
+      setRole(result);
     } catch (error) {
       console.error('Error fetching role details:', error);
     } finally {

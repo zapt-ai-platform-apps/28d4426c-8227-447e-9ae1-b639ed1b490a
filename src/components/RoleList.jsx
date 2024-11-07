@@ -1,5 +1,6 @@
 import { createSignal, onMount, Show, For } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import { createEvent } from '../supabaseClient';
 
 function RoleList() {
   const [roles, setRoles] = createSignal([]);
@@ -9,13 +10,14 @@ function RoleList() {
   const fetchRoles = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/getRoles');
-      if (response.ok) {
-        const data = await response.json();
-        setRoles(data.roles);
-      } else {
-        console.error('Error fetching roles:', response.statusText);
-      }
+      const prompt = `List 6 construction career roles suitable for kids to explore. For each role, provide a "title", a brief "description", and a placeholder "image" URL. Format the response as a JSON array of roles.`;
+
+      const result = await createEvent('chatgpt_request', {
+        prompt,
+        response_type: 'json',
+      });
+
+      setRoles(result);
     } catch (error) {
       console.error('Error fetching roles:', error);
     } finally {

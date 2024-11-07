@@ -22,7 +22,7 @@ Welcome to **Construction Career**! This interactive app is designed to inspire 
 ### 3. Discover Construction Roles
 
 1. **Role Selection**:
-   - A vibrant carousel displays various construction roles like **Architect**, **Engineer**, **Builder**, **Electrician**, and **Plumber**.
+   - A vibrant grid displays various construction roles like **Architect**, **Engineer**, **Builder**, **Electrician**, and **Plumber**.
    - Each role features a fun cartoon character and a catchy tagline.
 2. **Role Details**:
    - Selecting a role opens a page with a playful description, fun facts, and interactive animations.

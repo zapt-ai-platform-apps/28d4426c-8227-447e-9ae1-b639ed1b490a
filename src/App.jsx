@@ -7,7 +7,6 @@ import ProjectPlanner from './components/ProjectPlanner';
 import { createSignal, createEffect, onMount } from 'solid-js';
 import { supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 import './index.css';
 
 function App() {
@@ -62,7 +61,6 @@ function App() {
             </a>
             <Auth
               supabaseClient={supabase}
-              appearance={{ theme: ThemeSupa }}
               providers={['google', 'facebook', 'apple']}
               magicLink={true}
               showLinks={false}
@@ -71,21 +69,23 @@ function App() {
           </div>
         </div>
       ) : (
-        <Routes>
-          <Route path="/" component={LandingPage} />
-          <Route path="/roles" component={RoleList} />
-          <Route path="/roles/:id" component={RoleDetail} />
-          <Route path="/quiz/:roleTitle" component={QuizPage} />
-          <Route path="/planner" component={ProjectPlanner} />
-        </Routes>
-      )}
-      {user() && (
-        <button
-          class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
-          onClick={handleSignOut}
-        >
-          Sign Out
-        </button>
+        <>
+          <Routes>
+            <Route path="/" component={LandingPage} />
+            <Route path="/roles" component={RoleList} />
+            <Route path="/roles/:id" component={RoleDetail} />
+            <Route path="/quiz/:roleTitle" component={QuizPage} />
+            <Route path="/planner" component={ProjectPlanner} />
+          </Routes>
+          {user() && (
+            <button
+              class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          )}
+        </>
       )}
     </div>
   );

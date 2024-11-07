@@ -1,5 +1,6 @@
 import { createSignal } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
+import { createEvent } from '../supabaseClient';
 
 function ProjectPlanner() {
   const [projectType, setProjectType] = createSignal('');
@@ -18,7 +19,6 @@ function ProjectPlanner() {
         team: team(),
       };
 
-      // Simulate feedback generation via ChatGPT
       try {
         const prompt = `Provide feedback on planning a ${projectType()} using ${material()} with a team of ${team().join(', ')}.`;
 

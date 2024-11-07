@@ -1,4 +1,4 @@
-import { createEvent } from '../src/supabaseClient.js';
+import { createEvent } from '@zapt/zapt-js';
 import * as Sentry from '@sentry/node';
 
 Sentry.init({
@@ -21,6 +21,7 @@ export default async function handler(req, res) {
     const result = await createEvent('chatgpt_request', {
       prompt,
       response_type: 'json',
+      app_id: process.env.VITE_PUBLIC_APP_ID,
     });
 
     res.status(200).json({ questions: result });

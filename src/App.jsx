@@ -4,7 +4,7 @@ import LandingPage from './components/LandingPage';
 import RoleList from './components/RoleList';
 import RoleDetail from './components/RoleDetail';
 import QuizPage from './components/QuizPage';
-import ProjectPlanner from './components/ProjectPlanner';
+import ProjectBuilder from './components/ProjectBuilder';
 import { supabase } from './supabaseClient';
 import { Auth } from '@supabase/auth-ui-solid';
 
@@ -45,13 +45,13 @@ function App() {
   };
 
   return (
-    <div class="min-h-screen bg-gradient-to-br from-blue-100 to-green-100 text-gray-800">
+    <div class="min-h-screen bg-gradient-to-br from-yellow-100 to-orange-100 text-gray-800">
       <Show
         when={currentPage() === 'homePage'}
         fallback={
           <div class="flex items-center justify-center min-h-screen">
             <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
-              <h2 class="text-3xl font-bold mb-6 text-center text-blue-600">Sign in with ZAPT</h2>
+              <h2 class="text-3xl font-bold mb-6 text-center text-orange-600">Sign in with ZAPT</h2>
               <a
                 href="https://www.zapt.ai"
                 target="_blank"
@@ -76,7 +76,7 @@ function App() {
           <Route path="/roles" component={RoleList} />
           <Route path="/roles/:id" component={RoleDetail} />
           <Route path="/quiz/:roleTitle" component={QuizPage} />
-          <Route path="/planner" component={ProjectPlanner} />
+          <Route path="/builder" component={ProjectBuilder} />
         </Routes>
         <Show when={user()}>
           <button

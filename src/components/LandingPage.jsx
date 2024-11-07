@@ -8,22 +8,22 @@ function LandingPage() {
   };
 
   return (
-    <div class="flex flex-col items-center justify-center min-h-screen p-6">
-      <h1 class="text-4xl font-bold text-blue-700 mb-4">Welcome to Construction Career</h1>
-      <p class="text-lg text-center mb-6">
-        Explore exciting construction careers with Tilbury Douglas!
+    <div class="flex flex-col items-center justify-center h-full p-6 bg-gradient-to-br from-blue-100 to-green-100">
+      <h1 class="text-5xl font-extrabold text-orange-600 mb-4">Welcome to Buildville!</h1>
+      <p class="text-xl text-center mb-6">
+        Join <span class="text-orange-500">Constructor Carl</span> on a fun adventure and explore the exciting world of construction!
       </p>
-      <img src="https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw0fHxjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwd2l0aCUyMGtpZHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3MzA5NzI3Mzd8MA&ixlib=rb-4.0.3&q=80&w=1080"
+      <img src="https://images.unsplash.com/photo-1509453721491-c3af5961df76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHw4fHxjYXJ0b29uJTIwY29uc3RydWN0aW9uJTIwbWFzY290JTIwY2hhcmFjdGVyJTIwd2F2aW5nJTIwYXQlMjBraWRzJTIwb24lMjBhJTIwYnVpbGRpbmclMjBzaXRlfGVufDB8fHx8MTczMDk3ODAwOHww&ixlib=rb-4.0.3&q=80&w=1080"
         
-        alt="Construction site"
+        alt="Constructor Carl waving"
         class="w-full max-w-md mb-6"
-        data-image-request="construction site with kids learning"
+        data-image-request="cartoon construction mascot character waving at kids on a building site"
       />
       <button
-        class="bg-blue-500 text-white font-semibold py-3 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+        class="bg-orange-500 text-white font-semibold py-3 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 cursor-pointer"
         onClick={handleExplore}
       >
-        Explore Careers
+        Let's Build!
       </button>
     </div>
   );

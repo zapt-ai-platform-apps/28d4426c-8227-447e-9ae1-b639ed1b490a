@@ -3,6 +3,21 @@ import { Router } from '@solidjs/router';
 import App from './App';
 import './index.css';
 
+// Initialize Sentry for error logging
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
+  environment: import.meta.env.VITE_PUBLIC_APP_ENV,
+  integrations: [Sentry.browserTracingIntegration()],
+  initialScope: {
+    tags: {
+      type: 'frontend',
+      projectId: import.meta.env.VITE_PUBLIC_APP_ID,
+    },
+  },
+});
+
 // Add PWA support to the app
 window.progressierAppRuntimeSettings = {
   uid: import.meta.env.VITE_PUBLIC_APP_ID,
@@ -18,21 +33,6 @@ script.setAttribute(
 );
 script.setAttribute('defer', 'true');
 document.querySelector('head').appendChild(script);
-
-// Initialize Sentry for error logging
-import * as Sentry from '@sentry/browser';
-
-Sentry.init({
-  dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
-  environment: import.meta.env.VITE_PUBLIC_APP_ENV,
-  integrations: [Sentry.browserTracingIntegration()],
-  initialScope: {
-    tags: {
-      type: 'frontend',
-      projectId: import.meta.env.VITE_PUBLIC_APP_ID,
-    },
-  },
-});
 
 render(
   () => (

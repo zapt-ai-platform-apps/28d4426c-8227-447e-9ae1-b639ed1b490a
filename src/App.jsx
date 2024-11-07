@@ -1,17 +1,18 @@
 import { createSignal, createEffect, onMount, Show } from 'solid-js';
 import { Routes, Route } from '@solidjs/router';
+import { supabase } from './supabaseClient';
+import { Auth } from '@supabase/auth-ui-solid';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
 import LandingPage from './components/LandingPage';
 import RoleList from './components/RoleList';
 import RoleDetail from './components/RoleDetail';
 import QuizPage from './components/QuizPage';
 import ProjectBuilder from './components/ProjectBuilder';
-import { supabase } from './supabaseClient';
-import { Auth } from '@supabase/auth-ui-solid';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
 
 function App() {
   const [user, setUser] = createSignal(null);
   const [currentPage, setCurrentPage] = createSignal('login');
+  const [userRole, setUserRole] = createSignal(null);
 
   const checkUserSignedIn = async () => {
     const {
@@ -20,6 +21,29 @@ function App() {
     if (user) {
       setUser(user);
       setCurrentPage('homePage');
+      fetchUserRole();
+    }
+  };
+
+  const fetchUserRole = async () => {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData.session.access_token;
+
+    try {
+      const response = await fetch('/api/getUserRole', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUserRole(data.role);
+      } else {
+        console.error('Failed to fetch user role');
+      }
+    } catch (error) {
+      console.error('Error fetching user role:', error);
     }
   };
 
@@ -32,8 +56,10 @@ function App() {
       if (session?.user) {
         setUser(session.user);
         setCurrentPage('homePage');
+        fetchUserRole();
       } else {
         setUser(null);
+        setUserRole(null);
         setCurrentPage('login');
       }
     });
@@ -46,6 +72,7 @@ function App() {
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     setUser(null);
+    setUserRole(null);
     setCurrentPage('login');
   };
 
@@ -78,20 +105,40 @@ function App() {
           </div>
         }
       >
-        <Routes>
-          <Route path="/" component={LandingPage} />
-          <Route path="/roles" component={RoleList} />
-          <Route path="/roles/:id" component={RoleDetail} />
-          <Route path="/quiz/:roleTitle" component={QuizPage} />
-          <Route path="/builder" component={ProjectBuilder} />
-        </Routes>
-        <Show when={user()}>
+        <Show when={userRole() === 'admin'}>
+          {/* Admin-specific content */}
+          <div>
+            <h1 class="text-4xl font-bold text-orange-600 mb-4">
+              Admin Dashboard
+            </h1>
+            <p>Welcome, Admin!</p>
+            {/* Add admin functionalities here */}
+            <button
+              class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          </div>
+        </Show>
+        <Show when={userRole() === 'user'}>
+          {/* Regular user content */}
+          <Routes>
+            <Route path="/" component={LandingPage} />
+            <Route path="/roles" component={RoleList} />
+            <Route path="/roles/:id" component={RoleDetail} />
+            <Route path="/quiz/:roleTitle" component={QuizPage} />
+            <Route path="/builder" component={ProjectBuilder} />
+          </Routes>
           <button
             class="fixed top-4 right-4 bg-red-500 text-white font-semibold py-2 px-4 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
             onClick={handleSignOut}
           >
             Sign Out
           </button>
+        </Show>
+        <Show when={!userRole()}>
+          <p>Loading...</p>
         </Show>
       </Show>
     </div>

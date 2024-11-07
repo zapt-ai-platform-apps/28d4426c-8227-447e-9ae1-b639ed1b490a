@@ -1,6 +1,6 @@
 # Construction Career
 
-Welcome to **Buildville**! This app is designed to inspire kids to explore careers in construction in a fun and interactive way. Created in collaboration with **Tilbury Douglas**, a leading UK building, infrastructure, engineering, and fit-out company, we're here to turn learning into an adventure!
+Welcome to **Construction Career**! This app is designed to inspire kids to explore careers in construction in a fun and interactive way. Created in collaboration with **Tilbury Douglas**, a leading UK building, infrastructure, engineering, and fit-out company, we're here to turn learning into an adventure!
 
 ## User Journeys
 
@@ -61,4 +61,4 @@ Welcome to **Buildville**! This app is designed to inspire kids to explore caree
 
 ---
 
-We hope you enjoy building, exploring, and having fun in the exciting world of construction with **Buildville**!
+We hope you enjoy building, exploring, and having fun in the exciting world of construction with **Construction Career**!

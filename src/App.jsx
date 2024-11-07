@@ -72,7 +72,6 @@ function App() {
                 providers={['google', 'facebook', 'apple']}
                 magicLink={true}
                 showLinks={false}
-                view="magic_link"
               />
             </div>
           </div>

@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-import * as Sentry from "@sentry/node";
+import { createEvent } from '../src/supabaseClient.js';
+import * as Sentry from '@sentry/node';
 
 Sentry.init({
   dsn: process.env.VITE_PUBLIC_SENTRY_DSN,
@@ -7,26 +7,21 @@ Sentry.init({
   initialScope: {
     tags: {
       type: 'backend',
-      projectId: process.env.PROJECT_ID
-    }
-  }
+      projectId: process.env.PROJECT_ID,
+    },
+  },
 });
 
 export default async function handler(req, res) {
   try {
-    // Replace with actual API call to fetch roles
-    const response = await fetch('https://external-api.com/roles', {
-      headers: {
-        'Authorization': `Bearer ${process.env.EXTERNAL_API_KEY}`
-      }
+    const prompt = `List 6 construction career roles suitable for kids to explore. For each role, provide a "title", a brief "description", and a placeholder "image" URL. Format the response as a JSON array of roles.`;
+
+    const result = await createEvent('chatgpt_request', {
+      prompt,
+      response_type: 'json',
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      res.status(200).json({ roles: data });
-    } else {
-      throw new Error('Failed to fetch roles');
-    }
+    res.status(200).json({ roles: result });
   } catch (error) {
     Sentry.captureException(error);
     res.status(500).json({ error: 'Internal Server Error' });

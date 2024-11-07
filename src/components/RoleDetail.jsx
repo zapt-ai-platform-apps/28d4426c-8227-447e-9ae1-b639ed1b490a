@@ -5,9 +5,10 @@ function RoleDetail() {
   const params = useParams();
   const navigate = useNavigate();
   const [role, setRole] = createSignal(null);
+  const [loading, setLoading] = createSignal(false);
 
   const fetchRoleDetail = async () => {
-    // Replace with actual API call to fetch role details
+    setLoading(true);
     const response = await fetch(`/api/getRoleDetail?id=${params.id}`);
     if (response.ok) {
       const data = await response.json();
@@ -15,6 +16,7 @@ function RoleDetail() {
     } else {
       console.error('Error fetching role details:', response.statusText);
     }
+    setLoading(false);
   };
 
   onMount(fetchRoleDetail);
@@ -24,7 +26,7 @@ function RoleDetail() {
   };
 
   const handleQuiz = () => {
-    navigate('/quiz');
+    navigate(`/quiz/${role().title}`);
   };
 
   return (
@@ -35,7 +37,9 @@ function RoleDetail() {
       >
         &larr; Back to Roles
       </button>
-      {role() ? (
+      {loading() ? (
+        <p>Loading...</p>
+      ) : role() ? (
         <div>
           <h2 class="text-3xl font-bold text-blue-700 mb-4">{role().title}</h2>
           <img
@@ -60,7 +64,7 @@ function RoleDetail() {
           </button>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>No role details available.</p>
       )}
     </div>
   );

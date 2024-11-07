@@ -1,5 +1,5 @@
 import { createSignal, onMount } from 'solid-js';
-import { useNavigate } from '@solidjs/router';
+import { useNavigate, useParams } from '@solidjs/router';
 
 function QuizPage() {
   const [questions, setQuestions] = createSignal([]);
@@ -7,17 +7,20 @@ function QuizPage() {
   const [selectedOption, setSelectedOption] = createSignal(null);
   const [score, setScore] = createSignal(0);
   const [quizCompleted, setQuizCompleted] = createSignal(false);
+  const [loading, setLoading] = createSignal(false);
   const navigate = useNavigate();
+  const params = useParams();
 
   const fetchQuizQuestions = async () => {
-    // Replace with actual API call to fetch quiz questions
-    const response = await fetch('/api/getQuizQuestions');
+    setLoading(true);
+    const response = await fetch(`/api/getQuizQuestions?roleTitle=${params.roleTitle}`);
     if (response.ok) {
       const data = await response.json();
       setQuestions(data.questions);
     } else {
       console.error('Error fetching quiz questions:', response.statusText);
     }
+    setLoading(false);
   };
 
   onMount(fetchQuizQuestions);
@@ -57,7 +60,9 @@ function QuizPage() {
       >
         &larr; Back to Roles
       </button>
-      {quizCompleted() ? (
+      {loading() ? (
+        <p>Loading...</p>
+      ) : quizCompleted() ? (
         <div class="text-center">
           <h2 class="text-3xl font-bold text-blue-700 mb-4">Quiz Completed!</h2>
           <p class="text-lg mb-6">Your Score: {score()} / {questions().length}</p>
@@ -87,7 +92,9 @@ function QuizPage() {
             ))}
           </div>
           <button
-            class="bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+            class={`bg-blue-500 text-white font-semibold py-2 px-6 rounded-full shadow-md ${
+              selectedOption() === null ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer transform hover:scale-105 transition duration-300'
+            }`}
             onClick={handleNextQuestion}
             disabled={selectedOption() === null}
           >
@@ -95,7 +102,7 @@ function QuizPage() {
           </button>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>No questions available.</p>
       )}
     </div>
   );

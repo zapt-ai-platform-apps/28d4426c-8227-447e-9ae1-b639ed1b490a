@@ -1,5 +1,5 @@
-import fetch from 'node-fetch';
-import * as Sentry from "@sentry/node";
+import { createEvent } from '../src/supabaseClient.js';
+import * as Sentry from '@sentry/node';
 
 Sentry.init({
   dsn: process.env.VITE_PUBLIC_SENTRY_DSN,
@@ -7,25 +7,23 @@ Sentry.init({
   initialScope: {
     tags: {
       type: 'backend',
-      projectId: process.env.PROJECT_ID
-    }
-  }
+      projectId: process.env.PROJECT_ID,
+    },
+  },
 });
 
 export default async function handler(req, res) {
   try {
-    // Replace with actual API call to fetch quiz questions
-    const response = await fetch('https://external-api.com/quiz-questions', {
-      headers: {
-        'Authorization': `Bearer ${process.env.EXTERNAL_API_KEY}`
-      }
+    const { roleTitle } = req.query;
+
+    const prompt = `Create a quiz with 5 multiple-choice questions about being a ${roleTitle}. Provide each question with four options and indicate the correct answer. Format the response as a JSON array of questions, each with "question", "options", and "correctAnswer" fields.`;
+
+    const result = await createEvent('chatgpt_request', {
+      prompt,
+      response_type: 'json',
     });
-    if (response.ok) {
-      const data = await response.json();
-      res.status(200).json({ questions: data });
-    } else {
-      throw new Error('Failed to fetch quiz questions');
-    }
+
+    res.status(200).json({ questions: result });
   } catch (error) {
     Sentry.captureException(error);
     res.status(500).json({ error: 'Internal Server Error' });

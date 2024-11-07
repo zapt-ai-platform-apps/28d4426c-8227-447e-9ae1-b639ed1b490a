@@ -13,7 +13,7 @@ function LandingPage() {
       <p class="text-lg text-center mb-6">
         Explore exciting construction careers with Tilbury Douglas!
       </p>
-      <img src="https://images.unsplash.com/photo-1513467535987-fd81bc7d62f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwxMHx8Y29uc3RydWN0aW9uJTIwc2l0ZSUyMHdpdGglMjBraWRzJTIwbGVhcm5pbmd8ZW58MHx8fHwxNzMwOTcyNzM3fDA&ixlib=rb-4.0.3&q=80&w=1080"
+      <img src="https://images.unsplash.com/photo-1429497419816-9ca5cfb4571a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w2NjQ4Nzh8MHwxfHNlYXJjaHwzfHxjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwd2l0aCUyMGtpZHMlMjBsZWFybmluZ3xlbnwwfHx8fDE3MzA5NzI3Mzd8MA&ixlib=rb-4.0.3&q=80&w=1080"
         
         alt="Construction site"
         class="w-full max-w-md mb-6"

@@ -3,7 +3,7 @@ import { Router } from '@solidjs/router';
 import App from './App';
 import './index.css';
 
-// Add PWA support to the app (this will add a service worker and a manifest file, you don't need to do anything else)
+// Add PWA support to the app
 window.progressierAppRuntimeSettings = {
   uid: import.meta.env.VITE_PUBLIC_APP_ID,
   icon512: "https://otebnzqfzytqyyjdfhzr.supabase.co/storage/v1/render/image/public/icons/tilbury-douglas-icon.png?width=512&height=512",
@@ -16,7 +16,7 @@ script.setAttribute('defer', 'true');
 document.querySelector('head').appendChild(script);
 
 // Initialize Sentry for error logging
-import * as Sentry from "@sentry/browser";
+import * as Sentry from '@sentry/browser';
 
 Sentry.init({
   dsn: import.meta.env.VITE_PUBLIC_SENTRY_DSN,
@@ -25,9 +25,9 @@ Sentry.init({
   initialScope: {
     tags: {
       type: 'frontend',
-      projectId: import.meta.env.VITE_PUBLIC_APP_ID
-    }
-  }
+      projectId: import.meta.env.VITE_PUBLIC_APP_ID,
+    },
+  },
 });
 
 render(() => (

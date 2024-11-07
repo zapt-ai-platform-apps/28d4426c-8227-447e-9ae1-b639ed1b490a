@@ -6,12 +6,34 @@ function ProjectPlanner() {
   const [material, setMaterial] = createSignal('');
   const [team, setTeam] = createSignal([]);
   const [feedback, setFeedback] = createSignal('');
+  const [loading, setLoading] = createSignal(false);
   const navigate = useNavigate();
 
-  const handlePlanProject = () => {
-    // Simple logic to provide feedback
+  const handlePlanProject = async () => {
     if (projectType() && material() && team().length > 0) {
-      setFeedback('Great job planning your project!');
+      setLoading(true);
+      const projectDetails = {
+        projectType: projectType(),
+        material: material(),
+        team: team(),
+      };
+
+      // Simulate feedback generation via ChatGPT
+      try {
+        const prompt = `Provide feedback on planning a ${projectType()} using ${material()} with a team of ${team().join(', ')}.`;
+
+        const result = await createEvent('chatgpt_request', {
+          prompt,
+          response_type: 'text',
+        });
+
+        setFeedback(result);
+      } catch (error) {
+        console.error('Error generating feedback:', error);
+        setFeedback('There was an error generating feedback.');
+      } finally {
+        setLoading(false);
+      }
     } else {
       setFeedback('Please complete all fields to plan your project.');
     }
@@ -42,7 +64,7 @@ function ProjectPlanner() {
         <div>
           <label class="block text-lg font-semibold mb-2">Select Project Type:</label>
           <select
-            class="w-full p-3 border border-gray-300 rounded-lg"
+            class="w-full p-3 border border-gray-300 rounded-lg box-border"
             value={projectType()}
             onInput={(e) => setProjectType(e.target.value)}
           >
@@ -55,7 +77,7 @@ function ProjectPlanner() {
         <div>
           <label class="block text-lg font-semibold mb-2">Choose Materials:</label>
           <select
-            class="w-full p-3 border border-gray-300 rounded-lg"
+            class="w-full p-3 border border-gray-300 rounded-lg box-border"
             value={material()}
             onInput={(e) => setMaterial(e.target.value)}
           >
@@ -84,10 +106,11 @@ function ProjectPlanner() {
         </div>
       </div>
       <button
-        class="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300"
+        class={`bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-md cursor-pointer transform hover:scale-105 transition duration-300 ${loading() ? 'opacity-50 cursor-not-allowed' : ''}`}
         onClick={handlePlanProject}
+        disabled={loading()}
       >
-        Plan Project
+        {loading() ? 'Planning...' : 'Plan Project'}
       </button>
       {feedback() && (
         <p class="mt-4 text-lg font-semibold">{feedback()}</p>
